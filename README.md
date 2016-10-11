@@ -55,13 +55,15 @@ Go ahead and cat your public key.
 
 ```cat ~/.ssh/id_rsa.pub```
 
-It looks like a long string of goblity goop. It is the contents of the whole file.  Starting with the ```ssh-rsa``` and all the way to the ```User@Computer.local``` at the end
+It looks like a long string of goblity goop. It is the contents of the whole file.  Starting with the ```ssh-rsa``` and all the way to the ```User@Computer.local``` at the end.  (On windows machine git bash has a habit of including the spaces from the word wrap in the copied string.  For windows users may want to open file with notepad or other editor before copy.)
 
 ```sh
 ssh-rsaAABC3NzaC1yc2EAAAADAQABAAABAQDR5ehyadT9unUcxftJOitl5yOXgSi2Wj/s6ZBudUS5Cex56LrndfP5Uxb8+Qpx1D7gYNFacTIcrNDFjdmsjdDEIcz0WTV+mvMRU1G9kKQC01YeMDlwYCopuENaas5+cZ7DP/qiqqTt5QDuxFgJRTNEDGEebjyr9wYk+mveV/acBjgaUCI4sahij98BAGQPvNS1xvZcLlhYssJSZrSoRyWOHZ/hXkLtq9CvTaqkpaIeqvvmNxQNtzKu7ZwaYWLydEKCKTAe4ndObEfXexQHOOKwwDSyesjaNc6modkZZC+anGLlfwml4IUwGv10nogVg9DTNQQLSPVmnEN3Z User@Computer.local
 ```
+Copy the whole thing either from the output, opening the file and copying it, or with the command below.  
 
-Copy the whole thing.  
+```pbcopy < ~/.ssh/id_rsa.pub```
+
 ### Adding your SSH Key to Digital Ocean
 
 You'll need to go to your [Securit Settings.](https://cloud.digitalocean.com/settings/security)
