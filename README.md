@@ -72,7 +72,7 @@ Click on Add SSH key, paste your **public** SSH key into the box.  You can give 
 
 Now we can spin up a [droplet.](https://cloud.digitalocean.com/droplets)  Click Create Droplet.  Here we can choose what OS we want our server to be, as well as choose some default software to install.  
 
-Unless you have a reason not to, I suggest Ubuntu for the operation system.  Then you can click One-click Apps, and select MEAN. This will install, node and MongoDB for you by default.
+Unless you have a reason not to, I suggest Ubuntu for the operation system.  None of the images come with postgres installed, so we can just go with the blank build.
 
 Select your droplet size $5.  Select a data center, probably San Francisco or New York. You can select additional services, though some of these cost extra.  Make sure to select the SSH key you registered earlier. Name your droplet, it doesn't really matter what you call it, but you can put multiple projects on a single droplet, so you may not want it to be named after any specific project.
 
@@ -84,23 +84,26 @@ After your droplet has spun up, you'll know your ip address.  We'll connect to t
 
 root is the user that you will connect as.  You  an optionally set up [different users](https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-14-04) with their own ssh keys in case you want others to share the server, or connecting to a system as the root user all the time makes you queasy.   
 
-### Update Node
+### Install Node
 
 Initially an older version of Node is installed on the server, let's go ahead and update it real quick.  
 
 ```
 apt-get update && apt-get dist-upgrade
-npm i -g n ; n latest ; npm i -g npm
-
+apt-get install nodejs
+apt-get install npm
+npm i -g n
+n latest  
+npm i -g npm
 ```
 
 ## Swap -- Optional
-Swap instructions from [Zac Anger's](https://github.com/zacanger) wonderful [documentation](https://github.com/zacanger/doc). 
+Swap instructions from [Zac Anger's](https://github.com/zacanger) wonderful [documentation](https://github.com/zacanger/doc).
 
 The most limited resource on your droplet will be RAM. They don't come with much on the $5 tier.
 You probably don't need a whole lot to run your apps, but npm, grunt, gulp, or webpack take their fair share. You could pay for more RAM, but you could also just set up a swapfile.
 
-This should
+
 
 ```
 touch /swapfile
@@ -111,6 +114,7 @@ swapon /swapfile
 ```
 
 * The swapfile will only be in use till the droplet restarts.
+* You can turn off the swapfile by using ```swapoff /swapfile``` After you run your grunt gulp or webpack commands
 * If you want to make it so the dorplet loads with the swapfile one
 * `nano /etc/fstab`. add the following to the bottom:
   `/swapfile   none    swap    sw    0   0`
@@ -168,6 +172,12 @@ forever start server/server.js
 To see the currently running processes: ```forever list```
 To restart all forever processes: ```forever restartall```
 To restart a specific process: ```forever restart X``` where X is a pid, uid, or process index.
+
+### Postgres and you
+
+For your projects you have a few options.  You can install Postgres on your server.  Then your project will look at the local machine for it's database the same way that it does when running on your local machine.  The downside to this is if you like working with tools like pgAdmin, it can be difficult to get configured correctly.
+
+Or you can go with a DB as a service such as [ElephantSQL](https://www.elephantsql.com/). ElephantSQL has a free tier with 20MB disk space.  Not a ton, but for small project not needing to worry about it's set up may be worth it. 
 
 ### Setting Up Domains
 
