@@ -167,13 +167,33 @@ Then we will start the process running.
 
 ```sh
 npm install -g forever
-forever columns add dir
 forever start server/server.js
 ```
 
+When you have changes that you want to bring into the project.  Make sure that you've pushed to to github.  Then from your server.  The exact process you do may change a bit depending on how you've set up your project.
+
+```git pull``` This will get the new code onto the server.
+
+```gulp/grunt/webpack build``` (front end changes) In case you have a build process that needs to recompile those changes on the server
+
+```forever restartall``` (server changes) Restart the server to bring in the new server changes
+
+### Useful Forever Commands
+
 To see the currently running processes: ```forever list```
+
 To restart all forever processes: ```forever restartall```
+
 To restart a specific process: ```forever restart X``` where X is a pid, uid, or process index.
+
+To Stop all forever processes:```forever stopall```
+
+If you want to format the forever list output. I recommend the following changes to add the directory the script was ran from, and removing the command, as it should be node that is running the process.
+
+```
+forever columns rm command
+forever columns add dir
+```
 
 ### Postgres and you
 
@@ -247,3 +267,5 @@ server {
     }
 }
 ```
+
+After saving and exiting the file.  Run ```sudo service nginx restart``` 
