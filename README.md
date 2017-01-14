@@ -205,7 +205,7 @@ Or you can go with a DB as a service such as [ElephantSQL](https://www.elephants
 
 Unless you have lots of friends that enjoy accessing websites by ip (You know they exist) You'll want to route your domain to point at your server.  This is slightly different for each register.  Or you can tell the reigstrar to let Digital Ocean manage your routes.  [Here](https://github.com/zacanger/doc/blob/master/digital-ocean.md#domains) is a short description of how to set up Domain records.  
 
-### NGINX
+### NGINX - Optional
 
 If you don't want to use port 80, or you want to put multiple projects on one droplet, we can do that with nginx
 
@@ -220,7 +220,6 @@ We can set up each individual servers by editing the default file in this folder
 This example sets up 3 different servers listening for different domains/subdomains.
 
 They should all listen to port 80, that's the default for web-traffic. The server_name should be changed for each server, this is the domain that you want associated with each server.  Also the proxy_pass needs to be changed to match the port each is running on.
-
 ```
 server {
     listen 80;
@@ -268,4 +267,37 @@ server {
 }
 ```
 
-After saving and exiting the file.  Run ```sudo service nginx restart``` 
+After saving and exiting the file.  Run ```sudo service nginx restart```
+
+### SSH config files - Optional
+
+If you want to have an easier way to connect to servers that you use freqently, you can make a config file.
+On your computer in the ```~/.ssh``` folder ```touch config``` (no extension)  open it in your editor of choice
+We are going to name all the servers we want to keep track of, along with the credentials they use.  
+
+```
+Host <nickname> // This will be our nickname for the server
+    HostName <myServer.com> // Either the IP adress or domain name that you want to connect to
+    Port 22 // This is 22 by default for SSH connections 
+    RemoteForward 52698 localhost:52698 // This is if you want to use the rmate or ratom packages
+    User username // either root or one of the users you created on the server to run things
+    UseKeychain // This will make it so it remebers your passphrase on the keychain
+    IdentityFile ~/.ssh/id_rsa // Path to private key used for this connection in case you have multiple
+    
+Host q
+    HostName q.devmountain.com
+    Port 22
+    RemoteForward 52698 localhost:52698
+    User devmtn
+    UseKeychain
+    IdentityFile ~/.ssh/id_rsa
+
+Host brack
+    HostName brackcarmoy.com
+    Port 22
+    RemoteForward 52698 localhost:52698
+    User root
+    UseKeychain
+```
+
+After creating this you can just run ```ssh brack``` in place of ```ssh root@brackcarmony.com``` 
