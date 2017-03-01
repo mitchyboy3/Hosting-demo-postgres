@@ -281,7 +281,6 @@ Host <nickname> // This will be our nickname for the server
     Port 22 // This is 22 by default for SSH connections 
     RemoteForward 52698 localhost:52698 // This is if you want to use the rmate or ratom packages
     User username // either root or one of the users you created on the server to run things
-    UseKeychain // This will make it so it remebers your passphrase on the keychain
     IdentityFile ~/.ssh/id_rsa // Path to private key used for this connection in case you have multiple
     
 Host q
@@ -289,7 +288,6 @@ Host q
     Port 22
     RemoteForward 52698 localhost:52698
     User devmtn
-    UseKeychain
     IdentityFile ~/.ssh/id_rsa
 
 Host brack
@@ -297,7 +295,6 @@ Host brack
     Port 22
     RemoteForward 52698 localhost:52698
     User root
-    UseKeychain
 ```
 
 After creating this you can just run ```ssh brack``` in place of ```ssh root@brackcarmony.com``` 
