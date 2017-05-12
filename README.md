@@ -224,10 +224,17 @@ Now we can update and install nginx.
 sudo apt-get update;
 sudo apt-get install nginx;
 
-cd /etc/nginx/sites-available/
 ```
 
+Next we are going to go to this folder.
+```
+cd /etc/nginx/sites-available/
+```
+*if this folder does not exist instead go to the ```cd /etc/nginx/conf.d``` folder*
+
 We can set up each individual servers by editing the default file in this folder.  ```nano default``` Feel free to use vim, or another command line editor if you want.  
+
+*if there wasn't a sites-avaiable folder you will use ```nano default.conf``` instead*  
 
 This example sets up 3 different servers listening for different domains/subdomains.
 
