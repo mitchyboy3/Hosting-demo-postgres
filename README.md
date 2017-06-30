@@ -209,20 +209,6 @@ Unless you have lots of friends that enjoy accessing websites by ip (You know th
 
 If you don't want to use port 80, or you want to put multiple projects on one droplet, we can do that with nginx
 
-<section>
-The latest images of Ubuntu don't have a link to the code for nginx by default.  We are going to add it to our list of software we can install.
-` nano /etc/apt/sources.list `
-
-Add the following two lines to the end of the file
-
-```
-deb http://nginx.org/packages/ubuntu/ xenial nginx
-deb-src http://nginx.org/packages/ubuntu/ xenial nginx
-```
-Now we can update and install nginx.
-
-</section>
-
 ```
 sudo apt-get install nginx;
 ```
