@@ -11,6 +11,12 @@
 
   We will cover nginx at the end of this setup if you want to go the later route.
 
+## Turn off React's default Web Service Worker
+
+  Create React App's built in web service worker creates some problems when you try to server you API and your local files at the same time.  If you haven't already, remove the default web service worker from your  
+  From your src/index.js file.  Delete or comment out the line that says `registerServiceWorker();`
+
+
 ### Register for Digital Ocean
 
   If you've not already created a Digital Ocean Account, you can sign up through [this](https://m.do.co/c/8ea79fee4894) link to get $10 free.
