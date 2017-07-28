@@ -182,6 +182,8 @@ When you have changes that you want to bring into the project.  Make sure that y
 
 ```gulp/grunt/webpack build``` (front end changes) In case you have a build process that needs to recompile those changes on the server
 
+```npm run build```
+
 ```forever restartall``` (server changes) Restart the server to bring in the new server changes
 
 ### Useful Forever Commands
